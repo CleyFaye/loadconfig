@@ -4,7 +4,7 @@
   "description": "Load configuration from various places",
   "main": "./lib/loader.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepack": "npx tsc"
   },
   "repository": {
     "type": "git",
