@@ -9,8 +9,8 @@ lookup:
 - from a js file
 - from command line flags
 
-Configuration is very basic, and mostly handle strings, numbers and arrays of
-those.
+Configuration is very basic, and mostly handle strings, numbers, bool and array
+of strings.
 
 ## Usage
 
@@ -29,7 +29,7 @@ loadConfig(
 
 When passing default values, all expected values from command line should be
 provided.
-Each value can be either a string, a number, or an array of string or numbers.
+Each value can be either a string, a number, a boolean, or an array of string.
 For array values, it means that the command line will accept multiple
 occurrence of the same argument.
 
@@ -48,3 +48,7 @@ argument is matched multiple time, only the latest one is kept, except for
 properties that are arrays, in which case each value is concatenated to the
 array.
 If the default value is a number, values are converted to floats.
+For boolean, if the argument is present, the value is set to true.
+If the default value is true and you want to set it to false, it is possible to
+use `--no-<arg name>`.
+Arrays only support strings.
