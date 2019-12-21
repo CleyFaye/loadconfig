@@ -4,7 +4,19 @@
   "description": "Load configuration from various places",
   "main": "./lib/loader.js",
   "scripts": {
-    "prepack": "npx tsc"
+    "prepack": "npx grunt clean build && npm run test",
+    "test": "npx nyc mocha lib/test/**/*.test.js"
+  },
+  "nyc": {
+    "all": true,
+    "exclude-after-remap": false,
+    "include": [
+      "lib/**/*"
+    ],
+    "exclude": [
+      "lib/test/**/*"
+    ],
+    "require": "esm"
   },
   "repository": {
     "type": "git",
@@ -17,11 +29,21 @@
   },
   "homepage": "https://github.com/CleyFaye/loadconfig#readme",
   "devDependencies": {
+    "@types/chai": "^4.2.7",
     "@types/fs-extra": "^8.0.1",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.21",
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
+    "chai": "^4.2.0",
     "eslint": "^6.7.2",
+    "esm": "^3.2.25",
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-ts": "^6.0.0-beta.22",
+    "load-grunt-tasks": "^5.1.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
     "typescript": "^3.7.3"
   },
   "dependencies": {

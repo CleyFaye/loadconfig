@@ -4,6 +4,17 @@ module.exports = {
     "es6": true,
     "node": true
   },
+  "overrides": [
+    {
+      "files": ["src/test/**/*.ts"],
+      "env": {
+        "mocha": true
+      }
+    },
+  ],
+  "ignorePatterns": [
+    "Gruntfile.js"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",

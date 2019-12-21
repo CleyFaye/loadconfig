@@ -1,5 +1,8 @@
 {
   "files.exclude": {
-    "**/lib/": true
+    ".nyc_output": true,
+    ".tscache": true,
+    "lib/": true,
+    "test/": true
   }
 }
