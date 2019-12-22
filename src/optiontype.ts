@@ -15,7 +15,6 @@ export enum OptionType {
   BOOLEAN = "boolean",
 }
 
-
 /** Definition for a single option */
 export interface OptionDefinitionBase {
   /** Option name for use on command line. Default to name in kebab case */
