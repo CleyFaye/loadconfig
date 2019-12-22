@@ -51,11 +51,14 @@ export type OptionDefinition =
 export type OptionDefinitions = Record<string, OptionDefinition>;
 
 export const typeHaveExtra = (optionType: OptionType): boolean => {
-  switch (optionType) {
-  case OptionType.STRING: return true;
-  case OptionType.NUMBER: return true;
-  case OptionType.BOOLEAN: return false;
-  default:
-    throw new Error("Unexpected data type");
+  const truthTable = {
+    [OptionType.STRING]: true,
+    [OptionType.NUMBER]: true,
+    [OptionType.BOOLEAN]: false,
+  };
+  const result = truthTable[optionType];
+  if (result !== undefined) {
+    return result;
   }
+  throw new Error(`Unexpected data type "${optionType}"`);
 };
