@@ -10,7 +10,10 @@ lookup:
 - from command line flags
 
 Configuration is very basic, and mostly handle strings, numbers, bool and array
-of strings.
+of those.
+Array values defined in later configuration source overrides completely values
+from previous sources. This mean that an array value set in a json file
+would be completely erased by a value set in a js file or on command line.
 
 ## Usage
 
@@ -20,18 +23,34 @@ Where you need your configuration, call the function exported by the library.
 import loadConfig from "@cley_faye/loadconfig";
 
 loadConfig(
-  defaultValues,
+  options,
   configName
 ).then(config => {});
 ```
 
+The result is cached by default; that is because CLI arguments are removed from
+argv, so subsequent calls could return a different value than the first call.
+
 ## Settings
 
-When passing default values, all expected values from command line should be
-provided.
-Each value can be either a string, a number, a boolean, or an array of string.
+### Configuring options
+
+Each value can be either a string, a number, a boolean, or an array of these.
 For array values, it means that the command line will accept multiple
 occurrence of the same argument.
+The `options` argument is an object where keys are configuration options names
+and values are objects that have the following properties:
+
+- cliName: optional name for reading from the command line
+  (default to kebab case of the option name)
+- description: optional description that can be output using the
+  `displayHelp()` function
+- multiple: set to true to change the option type to be an array of values
+- type: expected value type. Only used for reading from CLI. Can be `string`,
+  `number` or `boolean`.
+- defaultValue: an optional default value
+
+### Naming the config source
 
 The `configName` argument is the name to use when looking for configuration in
 `package.json` and in external files.
@@ -40,15 +59,10 @@ names `.<configName>.js` and `.<configName>.json`.
 
 ## From command line
 
-Every property from the default values can be provided on the command line.
-Properties names will be converted from camel case to kebab case, and looked
-for in the command line arguments.
+Options can be read from command line.
 If an argument match, it is removed from the list of arguments. If the same
 argument is matched multiple time, only the latest one is kept, except for
 properties that are arrays, in which case each value is concatenated to the
 array.
-If the default value is a number, values are converted to floats.
-For boolean, if the argument is present, the value is set to true.
-If the default value is true and you want to set it to false, it is possible to
-use `--no-<arg name>`.
-Arrays only support strings.
+It is possible to remove a value using `--no-<arg name>`, except for booleans
+where it would set them to false.
