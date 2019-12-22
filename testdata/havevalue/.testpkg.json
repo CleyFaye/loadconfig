@@ -1,0 +1,6 @@
+{
+  "stringOpt": "testJson",
+  "numberOpt": 63,
+  "arrayOpt": ["val3", "val4", "val5"],
+  "boolOpt": false
+}
