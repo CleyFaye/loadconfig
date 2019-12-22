@@ -1,16 +1,6 @@
-import {OptionDefinitions, OptionType, OptionDefinition} from "./optiontype";
+import {OptionDefinitions, OptionType, OptionDefinition, typeHaveExtra} from "./optiontype";
 import {ConfigType, BaseValueType} from "./configtype";
 import {camelToKebab} from "./util";
-
-const typeHaveExtra = (optionType: OptionType): boolean => {
-  switch (optionType) {
-  case OptionType.STRING: return true;
-  case OptionType.NUMBER: return true;
-  case OptionType.BOOLEAN: return false;
-  default:
-    throw new Error("Unexpected data type");
-  }
-};
 
 /** Check if the given cli argument is in the options list */
 const checkAgainstOptions = (

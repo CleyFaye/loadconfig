@@ -50,3 +50,13 @@ export type OptionDefinition =
 
 /** List of options definitions */
 export type OptionDefinitions = Record<string, OptionDefinition>;
+
+export const typeHaveExtra = (optionType: OptionType): boolean => {
+  switch (optionType) {
+  case OptionType.STRING: return true;
+  case OptionType.NUMBER: return true;
+  case OptionType.BOOLEAN: return false;
+  default:
+    throw new Error("Unexpected data type");
+  }
+};
