@@ -5,7 +5,7 @@ export default async <T extends ConfigType> (
   configName?: string
 ): Promise<T> => {
   if (configName) {
-    const jsonPath = `.${configName}.json`;
+    const jsonPath = `.${configName.toLowerCase()}.json`;
     if (existsSync(jsonPath)) {
       return await readJSON(jsonPath);
     }
