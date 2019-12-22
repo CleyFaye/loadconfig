@@ -22,6 +22,6 @@ export default async <T extends ConfigType>(
   ...readFromDefaultValues<T>(options),
   ...await readFromPackage<T>(configName),
   ...await readFromJson<T>(configName),
-  ...await readFromJS<T>(configName),
+  ...readFromJS<T>(configName),
   ...readFromCommandLine<T>(options),
 });
