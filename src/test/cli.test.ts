@@ -2,25 +2,8 @@ import "chai/register-should";
 import readFromCommandLine from "../cli";
 import {OptionType, OptionDefinitions} from "../optiontype";
 import {ConfigType} from "../configtype";
-
-const cliData = {
-  stringOpt: "testCLI",
-  numberOpt: 1664,
-  arrayOpt: ["valCLI", "valCLI2"],
-  boolOpt: false,
-};
-
-const cliArgs = [
-  "--number-opt",
-  "1664",
-  "--array-strings",
-  "valCLI",
-  "--no-bool-opt",
-  "--array-strings",
-  "valCLI2",
-  "--string-opt",
-  "testCLI"
-];
+import {cliData, options, cliArgs} from "./testdata";
+import {replaceArgv} from "./util";
 
 const cliArgsWithNoise = [
   "--number-opt",
@@ -34,34 +17,6 @@ const cliArgsWithNoise = [
   "--string-opt",
   "testCLI"
 ];
-
-const options: OptionDefinitions = {
-  stringOpt: {
-    type: OptionType.STRING,
-    defaultValue: "defaultString",
-  },
-  numberOpt: {
-    type: OptionType.NUMBER,
-    defaultValue: 443,
-  },
-  arrayOpt: {
-    cliName: "array-strings",
-    type: OptionType.STRING,
-    multiple: true,
-  },
-  boolOpt: {
-    type: OptionType.BOOLEAN,
-  },
-};
-
-/** Replace process.argv's arguments with the provided list */
-const replaceArgv = (newParams: Array<string>): void => {
-  process.argv = [
-    process.argv[0],
-    process.argv[1],
-    ...newParams,
-  ];
-};
 
 describe("cli", function() {
   let previousArgv: Array<string>;
