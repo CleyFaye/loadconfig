@@ -115,10 +115,12 @@ export default <T extends ConfigType>(
       if (value === undefined) {
         result[optionName] = [];
       } else {
-        result[optionName] = (
-          (result[optionName] as Array<BaseValueType>)
-          || []
-        ).push(value);
+        const previousValue = result[optionName];
+        if (previousValue === undefined) {
+          result[optionName] = [value];
+        } else {
+          (previousValue as Array<BaseValueType>).push(value);
+        }
       }
     } else {
       result[optionName] = value;
