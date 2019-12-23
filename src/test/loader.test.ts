@@ -74,5 +74,17 @@ describe("loader", function() {
       const readData = await loadConfig(options, configName);
       readData.should.eql(defaultData);
     });
+    it("Get combined values (no external files, cli)", async function() {
+      moveToTestDir("nothavevalue");
+      replaceArgv(cliArgs);
+      const readData = await loadConfig(options);
+      readData.should.eql(cliData);
+    });
+    it("Get combined values (no external files, defaults)", async function() {
+      moveToTestDir("nothavevalue");
+      replaceArgv(["--somethingElse"]);
+      const readData = await loadConfig(options);
+      readData.should.eql(defaultData);
+    });
   });
 });
