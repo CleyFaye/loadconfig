@@ -44,7 +44,7 @@ const handleValue = (
     if (extra) {
       return extra;
     }
-    break;
+    throw new Error("Missing value for string argument");
   case OptionType.NUMBER:
     if (remove) {
       return;
@@ -55,16 +55,13 @@ const handleValue = (
         return asNumber;
       }
     }
-    break;
+    throw new Error("Missing value for number argument");
   case OptionType.BOOLEAN:
     if (remove) {
       return false;
     }
     return true;
   }
-  throw new Error(
-    `Incorrect parameter for option of type ${option.type}`
-  );
 };
 
 /** Try to read a value from the command line.
