@@ -50,6 +50,7 @@
     "fs-extra": "^8.1.0"
   },
   "files": [
-    "lib/*.ts"
+    "lib/*",
+    "!lib/test/**/*"
   ]
 }
