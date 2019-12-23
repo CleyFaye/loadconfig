@@ -15,13 +15,28 @@ export const readFromDefaultValues = <T extends ConfigType>(
   return result as T;
 };
 
-export default async <T extends ConfigType>(
+let cachedResult: ConfigType | undefined;
+
+export const clearCache = (): void => {
+  cachedResult = undefined;
+};
+
+export default <T extends ConfigType>(
   options: OptionDefinitions,
   configName?: string
-): Promise<T> => ({
-  ...readFromDefaultValues<T>(options),
-  ...await readFromPackage<T>(configName),
-  ...await readFromJson<T>(configName),
-  ...readFromJS<T>(configName),
-  ...readFromCommandLine<T>(options),
-});
+): Promise<T> => {
+  if (!cachedResult) {
+    return Promise.all([
+      readFromPackage<T>(configName),
+      readFromJson<T>(configName),
+    ]).then(([fromPackage, fromJson]) => cachedResult = {
+      ...readFromDefaultValues<T>(options),
+      ...fromPackage,
+      ...fromJson,
+      ...readFromJS<T>(configName),
+      ...readFromCommandLine<T>(options),
+    });
+  } else {
+    return Promise.resolve(cachedResult as T);
+  }
+};

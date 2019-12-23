@@ -1,5 +1,5 @@
 import "chai/register-should";
-import loadConfig, {readFromDefaultValues} from "../loader";
+import loadConfig, {readFromDefaultValues, clearCache} from "../loader";
 import {
   options,
   defaultData,
@@ -10,6 +10,7 @@ import {
   packageData,
 } from "./testdata";
 import {replaceArgv} from "./util";
+import {OptionType} from "../optiontype";
 
 const jsData = {
   stringOpt: "testJs",
@@ -36,6 +37,7 @@ describe("loader", function() {
     });
     beforeEach(function() {
       process.chdir(initialCwd);
+      clearCache();
     });
     after(function() {
       process.chdir(initialCwd);
@@ -85,6 +87,23 @@ describe("loader", function() {
       replaceArgv(["--somethingElse"]);
       const readData = await loadConfig(options);
       readData.should.eql(defaultData);
+    });
+    it("Test cache", async function() {
+      moveToTestDir("nofile");
+      replaceArgv(["--str", "argStr"]);
+      const readData = await loadConfig({
+        str: {
+          type: OptionType.STRING,
+        },
+      });
+      readData.should.eql({str: "argStr"});
+      // Command line should be exhausted by now
+      const readData2 = await loadConfig({
+        str: {
+          type: OptionType.STRING,
+        },
+      });
+      readData2.should.eql({str: "argStr"});
     });
   });
 });
