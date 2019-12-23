@@ -1,6 +1,6 @@
 import "chai/register-should";
 import readFromCommandLine from "../cli";
-import {OptionType, OptionDefinitions} from "../optiontype";
+import {OptionType} from "../optiontype";
 import {ConfigType} from "../configtype";
 import {cliData, options, cliArgs} from "./testdata";
 import {replaceArgv} from "./util";
