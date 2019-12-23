@@ -150,5 +150,27 @@ describe("cli", function() {
         str: [],
       });
     });
+    it("Make sure cli arguments are consummed", function() {
+      replaceArgv([
+        "--someArg",
+        "nothing",
+        "--str",
+        "str1",
+        "--someOtherArg",
+      ]);
+      const readValues = readFromCommandLine({
+        str: {
+          type: OptionType.STRING,
+        },
+      });
+      readValues.should.eql({
+        str: "str1",
+      });
+      process.argv.slice(2).should.eql([
+        "--someArg",
+        "nothing",
+        "--someOtherArg",
+      ]);
+    });
   });
 });
