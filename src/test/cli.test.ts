@@ -172,5 +172,24 @@ describe("cli", function() {
         "--someOtherArg",
       ]);
     });
+    it("Support for = type arguments", function() {
+      replaceArgv([
+        "--str",
+        "str1",
+        "--str=str2",
+        "--str",
+        "str3",
+      ]);
+      const readValues = readFromCommandLine({
+        str: {
+          type: OptionType.STRING,
+          multiple: true,
+          defaultValue: [],
+        },
+      });
+      readValues.should.eql({
+        str: ["str1", "str2", "str3"],
+      });
+    });
   });
 });

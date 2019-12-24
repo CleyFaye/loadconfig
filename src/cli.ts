@@ -10,18 +10,29 @@ const checkAgainstOptions = (
   {
     optionName: string;
     remove: boolean;
+    extra?: string;
   }
   | undefined
 ) => {
   for (const optionName in options) {
-    const cliName = options[optionName].cliName || camelToKebab(optionName);
-    if (cliArg === `--${cliName}`) {
+    const option = options[optionName];
+    const cliName = option.cliName || camelToKebab(optionName);
+    const startPart = `--${cliName}`;
+    const startPartFalse = `--no-${cliName}`;
+    if (cliArg === startPart) {
       return {
         optionName,
         remove: false,
       };
     }
-    if (cliArg === `--no-${cliName}`) {
+    if (typeHaveExtra(option.type) && cliArg.startsWith(`${startPart}=`)) {
+      return {
+        optionName,
+        remove: false,
+        extra: cliArg.substr(startPart.length + 1),
+      };
+    }
+    if (cliArg === startPartFalse) {
       return {
         optionName,
         remove: true,
@@ -84,7 +95,14 @@ const getNextValue = (
     }
     const option = options[optionDef.optionName];
     let extra;
-    if (typeHaveExtra(option.type) && !optionDef.remove) {
+    if (optionDef.extra !== undefined) {
+      extra = optionDef.extra;
+    }
+    if (
+      extra === undefined
+      && typeHaveExtra(option.type)
+      && !optionDef.remove
+    ) {
       extra = process.argv[i + 1];
       process.argv.splice(i, 2);
     } else {
