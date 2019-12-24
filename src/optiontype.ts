@@ -19,8 +19,6 @@ export enum OptionType {
 export interface OptionDefinitionBase {
   /** Option name for use on command line. Default to name in kebab case */
   cliName?: string;
-  /** Option description for CLI help */
-  description?: string;
   /** Option support multiple occurrence */
   multiple?: boolean;
   /** Option type */
