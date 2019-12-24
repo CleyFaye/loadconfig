@@ -27,23 +27,47 @@ export interface OptionDefinitionBase {
 
 export interface OptionDefinitionString extends OptionDefinitionBase {
   type: OptionType.STRING;
+  multiple?: false;
   defaultValue?: string;
 }
 
 export interface OptionDefinitionNumber extends OptionDefinitionBase {
   type: OptionType.NUMBER;
+  multiple?: false;
   defaultValue?: number;
 }
 
 export interface OptionDefinitionBoolean extends OptionDefinitionBase {
   type: OptionType.BOOLEAN;
+  multiple?: false;
   defaultValue?: boolean;
+}
+
+export interface OptionDefinitionStrings extends OptionDefinitionBase {
+  type: OptionType.STRING;
+  multiple: true;
+  defaultValue?: Array<string>;
+}
+
+export interface OptionDefinitionNumbers extends OptionDefinitionBase {
+  type: OptionType.NUMBER;
+  multiple: true;
+  defaultValue?: Array<number>;
+}
+
+export interface OptionDefinitionBooleans extends OptionDefinitionBase {
+  type: OptionType.BOOLEAN;
+  multiple: true;
+  defaultValue?: Array<boolean>;
 }
 
 export type OptionDefinition =
   OptionDefinitionString
   | OptionDefinitionNumber
-  | OptionDefinitionBoolean;
+  | OptionDefinitionBoolean
+  | OptionDefinitionStrings
+  | OptionDefinitionNumbers
+  | OptionDefinitionBooleans;
 
 /** List of options definitions */
 export type OptionDefinitions = Record<string, OptionDefinition>;
