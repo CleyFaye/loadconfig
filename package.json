@@ -7,6 +7,9 @@
     "prepack": "npx grunt clean build && npm run test",
     "test": "npx nyc mocha lib/test/**/*.test.js"
   },
+  "esm": {
+    "cache": false
+  },
   "nyc": {
     "all": true,
     "exclude-after-remap": false,
