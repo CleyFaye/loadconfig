@@ -43,8 +43,6 @@ and values are objects that have the following properties:
 
 - cliName: optional name for reading from the command line
   (default to kebab case of the option name)
-- description: optional description that can be output using the
-  `displayHelp()` function
 - multiple: set to true to change the option type to be an array of values
 - type: expected value type. Only used for reading from CLI. Can be `string`,
   `number` or `boolean`.
