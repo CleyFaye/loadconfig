@@ -35,25 +35,25 @@
   },
   "homepage": "https://github.com/CleyFaye/loadconfig#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.7",
-    "@types/fs-extra": "^8.0.1",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.0",
-    "@typescript-eslint/eslint-plugin": "^2.13.0",
-    "@typescript-eslint/parser": "^2.13.0",
+    "@types/chai": "^4.2.11",
+    "@types/fs-extra": "^8.1.0",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "esm": "^3.2.25",
-    "grunt": "^1.0.4",
+    "grunt": "^1.1.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-ts": "^6.0.0-beta.22",
     "load-grunt-tasks": "^5.1.0",
-    "mocha": "^6.2.2",
-    "nyc": "^15.0.0",
-    "typescript": "^3.7.4"
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.1",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "fs-extra": "^8.1.0"
+    "fs-extra": "^9.0.0"
   },
   "files": [
     "lib/*",
