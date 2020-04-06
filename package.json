@@ -5,6 +5,7 @@
   "main": "./lib/loader.js",
   "scripts": {
     "prepack": "npx grunt clean build && npm run test",
+    "pretest": "npx grunt build",
     "test": "npx nyc mocha lib/test/**/*.test.js"
   },
   "esm": {
