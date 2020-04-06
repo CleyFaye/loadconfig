@@ -24,19 +24,16 @@ export const clearCache = (): void => {
 export default <T extends ConfigType>(
   options: OptionDefinitions,
   configName?: string
-): Promise<T> => {
-  if (!cachedResult) {
-    return Promise.all([
-      readFromPackage<T>(configName),
-      readFromJson<T>(configName),
-    ]).then(([fromPackage, fromJson]) => cachedResult = {
-      ...readFromDefaultValues<T>(options),
-      ...fromPackage,
-      ...fromJson,
-      ...readFromJS<T>(configName),
-      ...readFromCommandLine<T>(options),
-    });
-  } else {
-    return Promise.resolve(cachedResult as T);
+): T => {
+  if (cachedResult) {
+    return cachedResult as T;
   }
+  cachedResult = {
+    ...readFromDefaultValues<T>(options),
+    ...readFromPackage<T>(configName),
+    ...readFromJson<T>(configName),
+    ...readFromJS<T>(configName),
+    ...readFromCommandLine<T>(options),
+  };
+  return cachedResult as T;
 };

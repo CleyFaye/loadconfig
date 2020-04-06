@@ -17,19 +17,19 @@ describe("package", function() {
     after(function() {
       process.chdir(initialCwd);
     });
-    it("Get expected values from package.json", async function() {
+    it("Get expected values from package.json", function() {
       moveToTestDir("havevalue");
-      const readData = await readFromPackage(configName);
+      const readData = readFromPackage(configName);
       readData.should.eql(packageData);
     });
-    it("Get empty if section is missing", async function() {
+    it("Get empty if section is missing", function() {
       moveToTestDir("nothavevalue");
-      const readData = await readFromPackage(configName);
+      const readData = readFromPackage(configName);
       readData.should.eql({});
     });
-    it("Get empty if file does not exist", async function() {
+    it("Get empty if file does not exist", function() {
       moveToTestDir("nofile");
-      const readData = await readFromPackage(configName);
+      const readData = readFromPackage(configName);
       readData.should.eql({});
     });
   });

@@ -1,13 +1,13 @@
-import {readJSON, existsSync} from "fs-extra";
+import {readJSONSync, existsSync} from "fs-extra";
 import {ConfigType} from "./configtype";
 
-export default async <T extends ConfigType> (
+export default <T extends ConfigType> (
   configName?: string
-): Promise<T> => {
+): T => {
   if (configName) {
     const jsonPath = `.${configName.toLowerCase()}.json`;
     if (existsSync(jsonPath)) {
-      return await readJSON(jsonPath);
+      return readJSONSync(jsonPath);
     }
   }
   return ({} as T);

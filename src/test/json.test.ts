@@ -17,14 +17,14 @@ describe("json", function() {
     after(function() {
       process.chdir(initialCwd);
     });
-    it("Get expected values from json file", async function() {
+    it("Get expected values from json file", function() {
       moveToTestDir("havevalue");
-      const readData = await readFromJson(configName);
+      const readData = readFromJson(configName);
       readData.should.eql(jsonData);
     });
-    it("Get empty if file does not exist", async function() {
+    it("Get empty if file does not exist", function() {
       moveToTestDir("nofile");
-      const readData = await readFromJson(configName);
+      const readData = readFromJson(configName);
       readData.should.eql({});
     });
   });
