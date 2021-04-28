@@ -1,0 +1,9 @@
+{
+  "somethingElse": 34,
+  "testPkg": {
+    "stringOpt": "test",
+    "numberOpt": 34,
+    "arrayOpt": ["val1", "val2"],
+    "boolOpt": true
+  }
+}
