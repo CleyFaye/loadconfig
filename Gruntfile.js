@@ -3,30 +3,24 @@ const loadGruntTasks = require("load-grunt-tasks");
 module.exports = grunt => {
   loadGruntTasks(grunt);
   grunt.initConfig({
-    "clean": {
+    clean: {
+      cache: [
+        ".tscache",
+        ".tsbuildinfo",
+        "**/.cache",
+      ],
       build: [
         "lib",
-        ".tscache"
       ],
     },
-    "ts": {
-      build: {
-        tsconfig: "./tsconfig.json",
-        passThrough: true,
-      },
-    },
+    "ts": {build: {tsconfig: "./tsconfig.json"}},
   });
   
   grunt.registerTask(
     "build",
     "Build the project into JavaScript files",
-    [
-      "ts:build",
-    ]
+    [ "ts:build"],
   );
 
-  grunt.registerTask(
-    "default",
-    "build"
-  );
+  grunt.registerTask("default", "build");
 };

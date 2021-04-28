@@ -1,4 +1,4 @@
-import {readJSONSync, existsSync} from "fs-extra";
+import {readFileSync, existsSync} from "fs";
 import {ConfigType} from "./configtype";
 
 export default <T extends ConfigType> (
@@ -7,7 +7,8 @@ export default <T extends ConfigType> (
   if (configName) {
     const jsonPath = `.${configName.toLowerCase()}.json`;
     if (existsSync(jsonPath)) {
-      return readJSONSync(jsonPath);
+      const fileData = readFileSync(jsonPath, "utf8");
+      return JSON.parse(fileData);
     }
   }
   return ({} as T);

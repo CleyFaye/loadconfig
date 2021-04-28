@@ -1,5 +1,5 @@
 import {resolve} from "path";
-import {existsSync} from "fs-extra";
+import {existsSync} from "fs";
 import {ConfigType} from "./configtype";
 
 export default <T extends ConfigType>(

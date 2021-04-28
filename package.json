@@ -4,23 +4,22 @@
   "description": "Load configuration from various places",
   "main": "./lib/loader.js",
   "scripts": {
-    "prepack": "npx grunt clean build && npm run test",
-    "pretest": "npx grunt build",
-    "test": "npx nyc mocha lib/test/**/*.test.js"
-  },
-  "esm": {
-    "cache": false
+    "prepack": "npm test && npx grunt clean build",
+    "test": "npx nyc mocha src/test/**/*.test.ts"
   },
   "nyc": {
     "all": true,
     "exclude-after-remap": false,
     "include": [
-      "lib/**/*"
+      "src/**/*"
     ],
     "exclude": [
-      "lib/test/**/*"
+      "src/test/**/*"
     ],
-    "require": "esm"
+    "require": [
+      "esm",
+      "ts-node/register"
+    ]
   },
   "repository": {
     "type": "git",
@@ -28,7 +27,7 @@
   },
   "author": {
     "name": "Gabriel Paul \"Cley Faye\" Risterucci",
-    "email": "cleyfaye@cleyfaye.net"
+    "email": "cleyfaye@gmail.com"
   },
   "license": "MIT",
   "bugs": {
@@ -36,6 +35,7 @@
   },
   "homepage": "https://github.com/CleyFaye/loadconfig#readme",
   "devDependencies": {
+    "@keeex/eslint-config": "^1.4.1",
     "@types/chai": "^4.2.17",
     "@types/fs-extra": "^9.0.11",
     "@types/mocha": "^8.2.2",
@@ -51,11 +51,10 @@
     "load-grunt-tasks": "^5.1.0",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
-  "dependencies": {
-    "fs-extra": "^9.1.0"
-  },
+  "dependencies": {},
   "files": [
     "lib/*",
     "!lib/test/**/*"
