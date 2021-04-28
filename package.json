@@ -58,6 +58,7 @@
   "dependencies": {},
   "files": [
     "lib/*",
-    "!lib/test/**/*"
+    "!lib/test/**/*",
+    "!**/*.map"
   ]
 }
