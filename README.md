@@ -23,8 +23,10 @@ Where you need your configuration, call the function exported by the library.
 import loadConfig from "@cley_faye/loadconfig";
 
 loadConfig(
-  options,
-  configName
+  {
+    options,
+    configName,
+  },
 ).then(config => {});
 ```
 
@@ -54,6 +56,10 @@ The `configName` argument is the name to use when looking for configuration in
 `package.json` and in external files.
 It is used to find a property by that name in `package.json`, and for files
 names `.<configName>.js` and `.<configName>.json`.
+
+It is possible to disable prefixing the config files by a dot (`.`) by adding the `noDotFile`
+property, set to true.
+It is also possible to skip some data source by setting the `disableSource` property.
 
 ## From command line
 

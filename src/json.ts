@@ -1,11 +1,13 @@
 import {readFileSync, existsSync} from "fs";
 import {ConfigType} from "./configtype";
+import {configFileName} from "./util";
 
 export default <T extends ConfigType> (
-  configName?: string
+  configName?: string,
+  noDotFile = false,
 ): T => {
   if (configName) {
-    const jsonPath = `.${configName.toLowerCase()}.json`;
+    const jsonPath = configFileName(configName, "json", !noDotFile);
     if (existsSync(jsonPath)) {
       const fileData = readFileSync(jsonPath, "utf8");
       return JSON.parse(fileData);

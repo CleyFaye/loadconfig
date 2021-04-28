@@ -19,3 +19,16 @@ export const camelToKebab = (camel: string): string =>
         /[A-Z][A-Z]+$/,
         v => v[0] + v.substr(1).toLowerCase()
       ).split(/(?=[A-Z])/).map(word => word.toLowerCase()).join("-");
+
+const sanitizeFilename = (filename: string): string => filename
+  .replace(/\\|\//g, "-")
+  .toLowerCase();
+
+/**
+ * Return a configuration filename
+ */
+export const configFileName = (
+  baseName: string,
+  suffix: string,
+  dotPrefix: boolean,
+) => `${dotPrefix ? "." : ""}${sanitizeFilename(baseName)}.${suffix}`;

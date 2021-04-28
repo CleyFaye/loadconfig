@@ -3,7 +3,8 @@ import {existsSync} from "fs";
 import {ConfigType} from "./configtype";
 
 export default <T extends ConfigType>(
-  configName?: string
+  configName?: string,
+  noDotFile = false,
 ): T => {
   if (configName) {
     configName = configName.replace(/\\|\//g, "");
