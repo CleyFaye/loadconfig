@@ -1,6 +1,6 @@
 {
   "name": "@cley_faye/loadconfig",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Load configuration from various places",
   "main": "./lib/loader.js",
   "scripts": {
