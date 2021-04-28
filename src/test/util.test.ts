@@ -100,43 +100,41 @@ const allTestCases: TestCases = [
   ...withFullCapsAndNumbers,
 ];
 
-const firstLetterLowerCase = (testList: TestCases): TestCases =>
-  testList.map(testElem => {
-    if (testElem.camel.length == 0) {
-      return {
-        camel: testElem.camel,
-        kebab: testElem.kebab,
-      };
-    }
+const firstLetterLowerCase = (testList: TestCases): TestCases => testList.map(testElem => {
+  if (testElem.camel.length === 0) {
     return {
-      camel: `${testElem.camel[0].toLowerCase()}${testElem.camel.substr(1)}`,
+      camel: testElem.camel,
       kebab: testElem.kebab,
     };
-  });
+  }
+  return {
+    camel: `${testElem.camel[0].toLowerCase()}${testElem.camel.substr(1)}`,
+    kebab: testElem.kebab,
+  };
+});
 
-const runTestCase = (testList: TestCases): void =>
-  testList.forEach(
-    testElem => camelToKebab(testElem.camel).should.equal(testElem.kebab)
-  );
+const runTestCase = (testList: TestCases): void => testList.forEach(
+  testElem => camelToKebab(testElem.camel).should.equal(testElem.kebab),
+);
 
-describe("util", function() {
-  describe("camelToKebab()", function() {
-    it("Support simple cases", function() {
+describe("util", () => {
+  describe("camelToKebab()", () => {
+    it("Support simple cases", () => {
       runTestCase(simpleCases);
     });
-    it("Support numbers", function() {
+    it("Support numbers", () => {
       runTestCase(withNumbers);
     });
-    it("Support with full caps", function() {
+    it("Support with full caps", () => {
       runTestCase(withFullCaps);
     });
-    it("Support with full caps and numbers", function() {
+    it("Support with full caps and numbers", () => {
       runTestCase(withFullCapsAndNumbers);
     });
-    it("Support starting with lowercase", function() {
+    it("Support starting with lowercase", () => {
       runTestCase(firstLetterLowerCase(allTestCases));
     });
-    it("Support empty input", function() {
+    it("Support empty input", () => {
       camelToKebab("").should.equal("");
     });
   });

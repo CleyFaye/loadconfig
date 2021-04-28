@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /** Possible option types */
 export enum OptionType {
   /** Option is kept as a string. */
   STRING = "string",
   /** Option is converted to number.
-   * 
+   *
    * If the value can't be converted to a number, an error is raised
    */
   NUMBER = "number",
   /** Option is a boolean.
-   * 
+   *
    * Option takes no extra parameter; the presence of the option means true.
    * Using "--no-<option name>" set the value to false.
    */
   BOOLEAN = "boolean",
 }
+/* eslint-enable @typescript-eslint/naming-convention */
 
 /** Definition for a single option */
 export interface OptionDefinitionBase {
@@ -72,15 +74,8 @@ export type OptionDefinition =
 /** List of options definitions */
 export type OptionDefinitions = Record<string, OptionDefinition>;
 
-export const typeHaveExtra = (optionType: OptionType): boolean => {
-  const truthTable = {
-    [OptionType.STRING]: true,
-    [OptionType.NUMBER]: true,
-    [OptionType.BOOLEAN]: false,
-  };
-  const result = truthTable[optionType];
-  if (result !== undefined) {
-    return result;
-  }
-  throw new Error(`Unexpected data type "${optionType}"`);
-};
+export const typeHaveExtra = (optionType: OptionType): boolean => ({
+  [OptionType.STRING]: true,
+  [OptionType.NUMBER]: true,
+  [OptionType.BOOLEAN]: false,
+}[optionType]);

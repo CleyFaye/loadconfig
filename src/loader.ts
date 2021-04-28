@@ -32,10 +32,10 @@ export interface Settings {
 }
 
 export const readFromDefaultValues = <T extends ConfigType>(
-  options: OptionDefinitions
+  options: OptionDefinitions,
 ): T => {
   const result: ConfigType = {};
-  for (const optionName in options) {
+  for (const optionName of Object.keys(options)) {
     result[optionName] = options[optionName].defaultValue;
   }
   return result as T;
@@ -58,7 +58,7 @@ export default <T extends ConfigType>(
   if (cachedResult) {
     return cachedResult as T;
   }
-  const disabledSource = disableSource || new Set([]);
+  const disabledSource = disableSource ?? new Set([]);
   const packageData = disabledSource.has(DataSource.package)
     ? undefined
     : readFromPackage<T>(configName);

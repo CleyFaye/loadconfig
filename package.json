@@ -44,6 +44,7 @@
     "@typescript-eslint/parser": "^4.22.0",
     "chai": "^4.3.4",
     "eslint": "^7.25.0",
+    "eslint-plugin-promise": "^5.1.0",
     "esm": "^3.2.25",
     "grunt": "^1.4.0",
     "grunt-contrib-clean": "^2.0.0",

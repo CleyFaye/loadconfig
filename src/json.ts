@@ -10,8 +10,8 @@ export default <T extends ConfigType> (
     const jsonPath = configFileName(configName, "json", !noDotFile);
     if (existsSync(jsonPath)) {
       const fileData = readFileSync(jsonPath, "utf8");
-      return JSON.parse(fileData);
+      return JSON.parse(fileData) as T;
     }
   }
-  return ({} as T);
+  return {} as unknown as T;
 };

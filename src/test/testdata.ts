@@ -14,9 +14,7 @@ export const options: OptionDefinitions = {
     type: OptionType.STRING,
     multiple: true,
   },
-  boolOpt: {
-    type: OptionType.BOOLEAN,
-  },
+  boolOpt: {type: OptionType.BOOLEAN},
 };
 
 export const configName = "testPkg";
@@ -37,7 +35,7 @@ export const cliArgs = [
   "--array-strings",
   "valCLI2",
   "--string-opt",
-  "testCLI"
+  "testCLI",
 ];
 
 export const cliData = {

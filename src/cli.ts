@@ -5,7 +5,7 @@ import {camelToKebab} from "./util";
 /** Check if the given cli argument is in the options list */
 const checkAgainstOptions = (
   cliArg: string,
-  options: OptionDefinitions
+  options: OptionDefinitions,
 ): (
   {
     optionName: string;
@@ -13,10 +13,10 @@ const checkAgainstOptions = (
     extra?: string;
   }
   | undefined
-) => {
-  for (const optionName in options) {
+  ) => {
+  for (const optionName of Object.keys(options)) {
     const option = options[optionName];
-    const cliName = option.cliName || camelToKebab(optionName);
+    const cliName = option.cliName ?? camelToKebab(optionName);
     const startPart = `--${cliName}`;
     const startPartFalse = `--no-${cliName}`;
     if (cliArg === startPart) {
@@ -45,49 +45,50 @@ const checkAgainstOptions = (
 const handleValue = (
   option: OptionDefinition,
   extra: string | undefined,
-  remove: boolean
-): (BaseValueType | undefined) => {
+  remove: boolean,
+): (BaseValueType | undefined
+  ) => {
   switch (option.type) {
-  case OptionType.STRING:
-    if (remove) {
-      return;
-    }
-    if (extra) {
-      return extra;
-    }
-    throw new Error("Missing value for string argument");
-  case OptionType.NUMBER:
-    if (remove) {
-      return;
-    }
-    if (extra) {
-      const asNumber = parseFloat(extra);
-      if (asNumber.toString() === extra) {
-        return asNumber;
+    case OptionType.STRING:
+      if (remove) {
+        return;
       }
-    }
-    throw new Error("Missing value for number argument");
-  case OptionType.BOOLEAN:
-    if (remove) {
-      return false;
-    }
-    return true;
+      if (extra) {
+        return extra;
+      }
+      throw new Error("Missing value for string argument");
+    case OptionType.NUMBER:
+      if (remove) {
+        return;
+      }
+      if (extra) {
+        const asNumber = parseFloat(extra);
+        if (asNumber.toString() === extra) {
+          return asNumber;
+        }
+      }
+      throw new Error("Missing value for number argument");
+    case OptionType.BOOLEAN:
+      if (remove) {
+        return false;
+      }
+      return true;
   }
 };
 
 /** Try to read a value from the command line.
- * 
+ *
  * If a value is found, it is removed from argv
  */
 const getNextValue = (
-  options: OptionDefinitions
+  options: OptionDefinitions,
 ): (
   {
     optionName: string;
     value: BaseValueType | undefined;
   }
   | undefined
-) => {
+  ) => {
   for (let i = 2; i < process.argv.length; ++i) {
     const optionDef = checkAgainstOptions(process.argv[i], options);
     if (!optionDef) {
@@ -104,6 +105,7 @@ const getNextValue = (
       && !optionDef.remove
     ) {
       extra = process.argv[i + 1];
+      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
       process.argv.splice(i, 2);
     } else {
       process.argv.splice(i, 1);
@@ -116,11 +118,11 @@ const getNextValue = (
 };
 
 /** Read options from CLI
- * 
+ *
  * This will remove parsed options from process.argv
  */
 export default <T extends ConfigType>(
-  options: OptionDefinitions
+  options: OptionDefinitions,
 ): T => {
   const result: ConfigType = {};
   let nextValue;

@@ -13,18 +13,13 @@ const truthTable: Record<OptionType, boolean> = {
   [OptionType.BOOLEAN]: false,
 };
 
-describe("optiontype", function() {
-  describe("typeHaveExtra()", function() {
-    it("Check valid results", function() {
+describe("optiontype", () => {
+  describe("typeHaveExtra()", () => {
+    it("Check valid results", () => {
       for (const typeName of allTypes) {
         typeHaveExtra(typeName)
           .should.equal(truthTable[typeName]);
       }
-    });
-    it("Throw on invalid value", function() {
-      (
-        (): boolean => typeHaveExtra("obviousinvalidtype" as OptionType)
-      ).should.throw();
     });
   });
 });

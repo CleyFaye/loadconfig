@@ -13,13 +13,13 @@ module.exports = grunt => {
         "lib",
       ],
     },
-    "ts": {build: {tsconfig: "./tsconfig.json"}},
+    ts: {build: {tsconfig: "./tsconfig.json"}},
   });
-  
+
   grunt.registerTask(
     "build",
     "Build the project into JavaScript files",
-    [ "ts:build"],
+    ["ts:build"],
   );
 
   grunt.registerTask("default", "build");
