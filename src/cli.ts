@@ -1,6 +1,6 @@
-import {OptionDefinitions, OptionType, OptionDefinition, typeHaveExtra} from "./optiontype";
-import {ConfigType, BaseValueType} from "./configtype";
-import {camelToKebab} from "./util";
+import {OptionDefinitions, OptionType, OptionDefinition, typeHaveExtra} from "./optiontype.js";
+import {ConfigType, BaseValueType} from "./configtype.js";
+import {camelToKebab} from "./util.js";
 
 /** Check if the given cli argument is in the options list */
 const checkAgainstOptions = (

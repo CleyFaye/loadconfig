@@ -1,6 +1,6 @@
 import {readFileSync, existsSync} from "fs";
-import {ConfigType} from "./configtype";
-import {configFileName} from "./util";
+import {ConfigType} from "./configtype.js";
+import {configFileName} from "./util.js";
 
 export default <T extends ConfigType> (
   configName?: string,

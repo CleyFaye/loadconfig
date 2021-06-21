@@ -1,4 +1,4 @@
-import {OptionDefinitions, OptionType} from "../optiontype";
+import {OptionDefinitions, OptionType} from "../optiontype.js";
 
 export const options: OptionDefinitions = {
   stringOpt: {

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import "chai/register-should";
-import readFromCommandLine from "../cli";
-import {OptionType} from "../optiontype";
-import {ConfigType} from "../configtype";
-import {cliData, options, cliArgs} from "./testdata";
-import {replaceArgv} from "./util";
+import "chai/register-should.js";
+import readFromCommandLine from "../cli.js";
+import {OptionType} from "../optiontype.js";
+import {ConfigType} from "../configtype.js";
+import {cliData, options, cliArgs} from "./testdata.js";
+import {replaceArgv} from "./util.js";
 
 const cliArgsWithNoise = [
   "--number-opt",

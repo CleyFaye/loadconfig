@@ -1,5 +1,5 @@
-import "chai/register-should";
-import {typeHaveExtra, OptionType} from "../optiontype";
+import "chai/register-should.js";
+import {typeHaveExtra, OptionType} from "../optiontype.js";
 
 const allTypes = [
   OptionType.STRING,

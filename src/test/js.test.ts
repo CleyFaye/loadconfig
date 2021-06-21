@@ -1,6 +1,6 @@
-import "chai/register-should";
-import readFromJs from "../js";
-import {jsData, configName} from "./testdata";
+import "chai/register-should.js";
+import readFromJs from "../js.js";
+import {jsData, configName} from "./testdata.js";
 
 const moveToTestDir = (testDir: string): void => process.chdir(`testdata/${testDir}`);
 
@@ -16,14 +16,14 @@ describe("js", () => {
     after(() => {
       process.chdir(initialCwd);
     });
-    it("Get expected values from js file", () => {
+    it("Get expected values from js file", async () => {
       moveToTestDir("havevalue");
-      const readData = readFromJs(configName);
+      const readData = await readFromJs(configName);
       readData.should.eql(jsData);
     });
-    it("Get empty if file does not exist", () => {
+    it("Get empty if file does not exist", async () => {
       moveToTestDir("nofile");
-      const readData = readFromJs(`${configName}2`);
+      const readData = await readFromJs(`${configName}2`);
       readData.should.eql({});
     });
   });

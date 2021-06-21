@@ -3,23 +3,11 @@
   "version": "3.0.2",
   "description": "Load configuration from various places",
   "main": "./lib/loader.js",
+  "type": "module",
   "scripts": {
-    "prepack": "npm test && npx grunt clean build",
-    "test": "npx nyc mocha src/test/**/*.test.ts"
-  },
-  "nyc": {
-    "all": true,
-    "exclude-after-remap": false,
-    "include": [
-      "src/**/*"
-    ],
-    "exclude": [
-      "src/test/**/*"
-    ],
-    "require": [
-      "esm",
-      "ts-node/register"
-    ]
+    "prepack": "npm test && npm run grunt -- clean build",
+    "test": "node --loader ts-node/esm node_modules/mocha/lib/cli/cli.js src/test/**/*.test.ts",
+    "grunt": "npm exec grunt -- --gruntfile Gruntfile.cjs"
   },
   "repository": {
     "type": "git",
@@ -48,7 +36,7 @@
     "esm": "^3.2.25",
     "grunt": "^1.4.0",
     "grunt-contrib-clean": "^2.0.0",
-    "grunt-ts": "^6.0.0-beta.22",
+    "grunt-shell": "^3.0.1",
     "load-grunt-tasks": "^5.1.0",
     "mocha": "^9.0.1",
     "nyc": "^15.1.0",

@@ -1,6 +1,6 @@
-import "chai/register-should";
-import readFromPackage from "../package";
-import {packageData, configName} from "./testdata";
+import "chai/register-should.js";
+import readFromPackage from "../package.js";
+import {packageData, configName} from "./testdata.js";
 
 const moveToTestDir = (testDir: string): void => process.chdir(`testdata/${testDir}`);
 

@@ -1,9 +1,9 @@
-import readFromPackage from "./package";
-import readFromJson from "./json";
-import readFromJS from "./js";
-import readFromCommandLine from "./cli";
-import {OptionDefinitions} from "./optiontype";
-import {ConfigType} from "./configtype";
+import readFromPackage from "./package.js";
+import readFromJson from "./json.js";
+import readFromJS from "./js.js";
+import readFromCommandLine from "./cli.js";
+import {OptionDefinitions} from "./optiontype.js";
+import {ConfigType} from "./configtype.js";
 
 export enum DataSource {
   package = "PACKAGE",
@@ -47,14 +47,14 @@ export const clearCache = (): void => {
   cachedResult = undefined;
 };
 
-export default <T extends ConfigType>(
+export default async <T extends ConfigType>(
   {
     options,
     disableSource,
     noDotFile,
     configName,
   }: Settings,
-): T => {
+): Promise<T> => {
   if (cachedResult) {
     return cachedResult as T;
   }
@@ -67,10 +67,11 @@ export default <T extends ConfigType>(
     : readFromJson<T>(configName, noDotFile);
   const jsData = disabledSource.has(DataSource.js)
     ? undefined
-    : readFromJS<T>(configName, noDotFile);
+    : await readFromJS<T>(configName, noDotFile);
   const cliData = disabledSource.has(DataSource.commandLine)
     ? undefined
     : readFromCommandLine<T>(options);
+  // eslint-disable-next-line require-atomic-updates
   cachedResult = {
     ...readFromDefaultValues<T>(options),
     ...packageData,

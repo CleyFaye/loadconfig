@@ -1,5 +1,5 @@
 import {readFileSync, existsSync} from "fs";
-import {ConfigType} from "./configtype";
+import {ConfigType} from "./configtype.js";
 
 const PACKAGE = "package.json";
 

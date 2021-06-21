@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const loadGruntTasks = require("load-grunt-tasks");
 
 module.exports = grunt => {
@@ -13,13 +14,19 @@ module.exports = grunt => {
         "lib",
       ],
     },
-    ts: {build: {tsconfig: "./tsconfig.json"}},
+    shell: {
+      ts_build: {
+        command: "npm exec tsc",
+        stdout: true,
+        stderr: true,
+      },
+    },
   });
 
   grunt.registerTask(
     "build",
     "Build the project into JavaScript files",
-    ["ts:build"],
+    ["shell:ts_build"],
   );
 
   grunt.registerTask("default", "build");

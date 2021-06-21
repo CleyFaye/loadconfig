@@ -1,5 +1,5 @@
-import "chai/register-should";
-import "../loader";
+import "chai/register-should.js";
+import "../loader.js";
 
 describe("Test framework can run", () => {
   it("true is true", () => {

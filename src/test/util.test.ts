@@ -1,5 +1,5 @@
-import "chai/register-should";
-import {camelToKebab} from "../util";
+import "chai/register-should.js";
+import {camelToKebab} from "../util.js";
 
 interface TestCase {
   camel: string;
