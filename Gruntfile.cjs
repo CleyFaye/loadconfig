@@ -16,7 +16,7 @@ module.exports = grunt => {
     },
     run: {
       ts_build: {
-        cmd: "npm",
+        cmd: "npx",
         args: ["tsc"],
       },
     },
