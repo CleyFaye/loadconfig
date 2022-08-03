@@ -14,11 +14,10 @@ module.exports = grunt => {
         "lib",
       ],
     },
-    shell: {
+    run: {
       ts_build: {
-        command: "npm exec tsc",
-        stdout: true,
-        stderr: true,
+        cmd: "npm",
+        args: ["tsc"],
       },
     },
   });
@@ -26,7 +25,7 @@ module.exports = grunt => {
   grunt.registerTask(
     "build",
     "Build the project into JavaScript files",
-    ["shell:ts_build"],
+    ["run:ts_build"],
   );
 
   grunt.registerTask("default", "build");
