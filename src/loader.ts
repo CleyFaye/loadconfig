@@ -47,7 +47,7 @@ export const clearCache = (): void => {
   cachedResult = undefined;
 };
 
-export default async <T extends ConfigType>(
+const readFromAll = async <T extends ConfigType>(
   {
     options,
     disableSource,
@@ -81,3 +81,5 @@ export default async <T extends ConfigType>(
   };
   return cachedResult as T;
 };
+
+export default readFromAll;

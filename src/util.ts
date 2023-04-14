@@ -7,17 +7,17 @@
  */
 export const camelToKebab = (camel: string): string => camel.length === 0
   ? ""
-  : `${camel[0].toUpperCase()}${camel.substr(1)}`
+  : `${camel[0].toUpperCase()}${camel.substring(1)}`
     .replace(
       /[A-Z][A-Z0-9]+[a-z0-9]/gu,
       v => v[0]
       // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      + v.substr(1, v.length - 3).toLowerCase()
+      + v.substring(1, v.length - 3).toLowerCase()
       // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      + v.substr(v.length - 2),
+      + v.substring(v.length - 2),
     ).replace(
       /[A-Z][A-Z]+$/u,
-      v => v[0] + v.substr(1).toLowerCase(),
+      v => v[0] + v.substring(1).toLowerCase(),
     )
     .split(/(?=[A-Z])/u)
     .map(word => word.toLowerCase())

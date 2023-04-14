@@ -16,7 +16,7 @@ const checkAgainstOptions = (
   ) => {
   for (const optionName of Object.keys(options)) {
     const option = options[optionName];
-    const cliName = option.cliName ?? camelToKebab(optionName);
+    const cliName = option.cliName ? option.cliName : camelToKebab(optionName);
     const startPart = `--${cliName}`;
     const startPartFalse = `--no-${cliName}`;
     if (cliArg === startPart) {
@@ -29,7 +29,7 @@ const checkAgainstOptions = (
       return {
         optionName,
         remove: false,
-        extra: cliArg.substr(startPart.length + 1),
+        extra: cliArg.substring(startPart.length + 1),
       };
     }
     if (cliArg === startPartFalse) {
@@ -49,30 +49,30 @@ const handleValue = (
 ): (BaseValueType | undefined
   ) => {
   switch (option.type) {
-    case OptionType.STRING:
-      if (remove) {
-        return;
+  case OptionType.STRING:
+    if (remove) {
+      return;
+    }
+    if (extra) {
+      return extra;
+    }
+    throw new Error("Missing value for string argument");
+  case OptionType.NUMBER:
+    if (remove) {
+      return;
+    }
+    if (extra) {
+      const asNumber = parseFloat(extra);
+      if (asNumber.toString() === extra) {
+        return asNumber;
       }
-      if (extra) {
-        return extra;
-      }
-      throw new Error("Missing value for string argument");
-    case OptionType.NUMBER:
-      if (remove) {
-        return;
-      }
-      if (extra) {
-        const asNumber = parseFloat(extra);
-        if (asNumber.toString() === extra) {
-          return asNumber;
-        }
-      }
-      throw new Error("Missing value for number argument");
-    case OptionType.BOOLEAN:
-      if (remove) {
-        return false;
-      }
-      return true;
+    }
+    throw new Error("Missing value for number argument");
+  case OptionType.BOOLEAN:
+    if (remove) {
+      return false;
+    }
+    return true;
   }
 };
 
@@ -121,7 +121,7 @@ const getNextValue = (
  *
  * This will remove parsed options from process.argv
  */
-export default <T extends ConfigType>(
+const readFromCLI = <T extends ConfigType>(
   options: OptionDefinitions,
 ): T => {
   const result: ConfigType = {};
@@ -145,3 +145,5 @@ export default <T extends ConfigType>(
   }
   return result as T;
 };
+
+export default readFromCLI;

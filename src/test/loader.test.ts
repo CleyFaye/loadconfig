@@ -1,5 +1,6 @@
 import "chai/register-should.js";
 import loadConfig, {readFromDefaultValues, clearCache, DataSource} from "../loader.js";
+import {OptionType} from "../optiontype.js";
 import {
   options,
   defaultData,
@@ -10,7 +11,6 @@ import {
   packageData,
 } from "./testdata.js";
 import {replaceArgv} from "./util.js";
-import {OptionType} from "../optiontype.js";
 
 const jsData = {
   stringOpt: "testJs",

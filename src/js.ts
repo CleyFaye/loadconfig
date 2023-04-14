@@ -3,7 +3,7 @@ import {existsSync} from "fs";
 import {ConfigType} from "./configtype.js";
 import {configFileName} from "./util.js";
 
-export default async <T extends ConfigType>(
+const readFromJS = async <T extends ConfigType>(
   configName?: string,
   noDotFile = false,
 ): Promise<T> => {
@@ -18,3 +18,5 @@ export default async <T extends ConfigType>(
   }
   return {} as unknown as T;
 };
+
+export default readFromJS;

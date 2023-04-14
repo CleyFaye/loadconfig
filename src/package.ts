@@ -3,7 +3,7 @@ import {ConfigType} from "./configtype.js";
 
 const PACKAGE = "package.json";
 
-export default <T extends ConfigType> (
+const readFromPackage = <T extends ConfigType> (
   configName?: string,
 ): T => {
   if (configName) {
@@ -17,3 +17,5 @@ export default <T extends ConfigType> (
   }
   return {} as unknown as T;
 };
+
+export default readFromPackage;

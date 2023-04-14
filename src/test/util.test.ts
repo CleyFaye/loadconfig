@@ -108,7 +108,7 @@ const firstLetterLowerCase = (testList: TestCases): TestCases => testList.map(te
     };
   }
   return {
-    camel: `${testElem.camel[0].toLowerCase()}${testElem.camel.substr(1)}`,
+    camel: `${testElem.camel[0].toLowerCase()}${testElem.camel.substring(1)}`,
     kebab: testElem.kebab,
   };
 });

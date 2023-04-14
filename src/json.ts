@@ -2,7 +2,7 @@ import {readFileSync, existsSync} from "fs";
 import {ConfigType} from "./configtype.js";
 import {configFileName} from "./util.js";
 
-export default <T extends ConfigType> (
+const readFromJSON = <T extends ConfigType> (
   configName?: string,
   noDotFile = false,
 ): T => {
@@ -15,3 +15,5 @@ export default <T extends ConfigType> (
   }
   return {} as unknown as T;
 };
+
+export default readFromJSON;
