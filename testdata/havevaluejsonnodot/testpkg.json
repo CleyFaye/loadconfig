@@ -2,5 +2,7 @@
   "stringOpt": "testJson",
   "numberOpt": 63,
   "arrayOpt": ["val3", "val4", "val5"],
-  "boolOpt": false
+  "boolOpt": false,
+  "objOpt": {"rule": 1664},
+  "arrayObj": [{"rule": 34}, {"rule": 1492}]
 }

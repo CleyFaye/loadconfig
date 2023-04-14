@@ -14,6 +14,11 @@ export enum OptionType {
    * Using "--no-<option name>" set the value to false.
    */
   BOOLEAN = "boolean",
+  /** Option is any JS object.
+   * 
+   * This can not be set from the CLI, only from JavaScript/JSON/package.json
+   */
+  OBJECT = "object",
 }
 /* eslint-enable @typescript-eslint/naming-convention */
 
@@ -45,6 +50,12 @@ export interface OptionDefinitionBoolean extends OptionDefinitionBase {
   defaultValue?: boolean;
 }
 
+export interface OptionDefinitionObject {
+  type: OptionType.OBJECT;
+  multiple?: false;
+  defaultValue?: object;
+}
+
 export interface OptionDefinitionStrings extends OptionDefinitionBase {
   type: OptionType.STRING;
   multiple: true;
@@ -63,13 +74,21 @@ export interface OptionDefinitionBooleans extends OptionDefinitionBase {
   defaultValue?: Array<boolean>;
 }
 
+export interface OptionDefinitionObjects {
+  type: OptionType.OBJECT;
+  multiple: true;
+  defaultValue?: Array<object>;
+}
+
 export type OptionDefinition =
   OptionDefinitionString
   | OptionDefinitionNumber
   | OptionDefinitionBoolean
   | OptionDefinitionStrings
+  | OptionDefinitionObject
   | OptionDefinitionNumbers
-  | OptionDefinitionBooleans;
+  | OptionDefinitionBooleans
+  | OptionDefinitionObjects;
 
 /** List of options definitions */
 export type OptionDefinitions = Record<string, OptionDefinition>;
@@ -78,4 +97,5 @@ export const typeHaveExtra = (optionType: OptionType): boolean => ({
   [OptionType.STRING]: true,
   [OptionType.NUMBER]: true,
   [OptionType.BOOLEAN]: false,
+  [OptionType.OBJECT]: false,
 }[optionType]);

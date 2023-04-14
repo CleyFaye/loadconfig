@@ -16,7 +16,8 @@ const checkAgainstOptions = (
   ) => {
   for (const optionName of Object.keys(options)) {
     const option = options[optionName];
-    const cliName = option.cliName ? option.cliName : camelToKebab(optionName);
+    if (option.type === OptionType.OBJECT) continue;
+    const cliName = option.cliName ?? camelToKebab(optionName);
     const startPart = `--${cliName}`;
     const startPartFalse = `--no-${cliName}`;
     if (cliArg === startPart) {

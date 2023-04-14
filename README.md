@@ -48,6 +48,8 @@ and values are objects that have the following properties:
 - multiple: set to true to change the option type to be an array of values
 - type: expected value type. Only used for reading from CLI. Can be `string`,
   `number` or `boolean`.
+  A special type `object` can be used; it will pass the content of the json/javascript config as-is,
+  and cannot be used for CLI.
 - defaultValue: an optional default value
 
 ### Naming the config source

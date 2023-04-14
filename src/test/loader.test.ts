@@ -9,14 +9,9 @@ import {
   cliData,
   jsonData,
   packageData,
+  jsData,
 } from "./testdata.js";
 import {replaceArgv} from "./util.js";
-
-const jsData = {
-  stringOpt: "testJs",
-  numberOpt: 42,
-  arrayOpt: ["val6"],
-};
 
 const moveToTestDir = (testDir: string): void => process.chdir(`testdata/${testDir}`);
 
@@ -25,7 +20,7 @@ const testCLI = () => {
     moveToTestDir("havevalue");
     replaceArgv(cliArgs);
     const readData = await loadConfig({options, configName});
-    readData.should.eql(cliData);
+    readData.should.eql({ ...cliData, arrayObj: jsData.arrayObj, objOpt: jsData.objOpt, });
   });
 };
 
@@ -93,7 +88,11 @@ const testNoValue = () => {
     moveToTestDir("nothavevalue");
     replaceArgv(cliArgs);
     const readData = await loadConfig({options});
-    readData.should.eql(cliData);
+    readData.should.eql({
+      ...cliData,
+      arrayObj: undefined,
+      objOpt: undefined,
+    });
   });
   it("Get combined values (no external files, defaults)", async () => {
     moveToTestDir("nothavevalue");

@@ -4,6 +4,8 @@
     "stringOpt": "test",
     "numberOpt": 34,
     "arrayOpt": ["val1", "val2"],
-    "boolOpt": true
+    "boolOpt": true,
+    "objOpt": {"rule": 34},
+    "arrayObj": [{"rule": 34}, {"rule": 63}]
   }
 }

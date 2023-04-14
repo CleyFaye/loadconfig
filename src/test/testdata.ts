@@ -15,6 +15,8 @@ export const options: OptionDefinitions = {
     multiple: true,
   },
   boolOpt: {type: OptionType.BOOLEAN},
+  objOpt: {type: OptionType.OBJECT},
+  arrayObj: {type: OptionType.OBJECT, multiple: true},
 };
 
 export const configName = "testPkg";
@@ -24,6 +26,8 @@ export const defaultData = {
   numberOpt: 443,
   arrayOpt: undefined,
   boolOpt: undefined,
+  arrayObj: undefined,
+  objOpt: undefined,
 };
 
 export const cliArgs = [
@@ -49,6 +53,8 @@ export const jsData = {
   stringOpt: "testJs",
   numberOpt: 42,
   arrayOpt: ["val6"],
+  objOpt: {rule: 34},
+  arrayObj: [{rule: 34}, {rule: 63}],
 };
 
 export const jsonData = {
@@ -56,6 +62,8 @@ export const jsonData = {
   numberOpt: 63,
   arrayOpt: ["val3", "val4", "val5"],
   boolOpt: false,
+  objOpt: {rule: 1664},
+  arrayObj: [{rule: 34}, {rule: 1492}]
 };
 
 export const packageData = {
@@ -63,4 +71,6 @@ export const packageData = {
   numberOpt: 34,
   arrayOpt: ["val1", "val2"],
   boolOpt: true,
+  objOpt: {rule: 34},
+  arrayObj: [{rule: 34}, {rule: 63}],
 };

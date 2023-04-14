@@ -11,6 +11,7 @@ const truthTable: Record<OptionType, boolean> = {
   [OptionType.STRING]: true,
   [OptionType.NUMBER]: true,
   [OptionType.BOOLEAN]: false,
+  [OptionType.OBJECT]: false,
 };
 
 describe("optiontype", () => {

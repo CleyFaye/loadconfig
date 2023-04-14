@@ -1,7 +1,8 @@
 export type BaseValueType =
   string
   | number
-  | boolean;
+  | boolean
+  | object;
 
 export type ValueType =
   BaseValueType
