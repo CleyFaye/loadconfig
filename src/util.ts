@@ -12,7 +12,7 @@ export const camelToKebab = (camel: string): string => camel.length === 0
       /[A-Z][A-Z0-9]+[a-z0-9]/gu,
       v => v[0]
       // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      + v.substring(1, v.length - 3).toLowerCase()
+      + v.substring(1, v.length - 3 + 1).toLowerCase()
       // eslint-disable-next-line @typescript-eslint/no-magic-numbers
       + v.substring(v.length - 2),
     ).replace(
